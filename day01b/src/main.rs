@@ -12,11 +12,8 @@ pub fn main() {
                 let new_dial = dial.wrapping_add(num);
                 (
                     new_dial.rem_euclid(100),
-                    sum + if new_dial <= 0 {
-                        (dial != 0) as i16 + (-new_dial / 100)
-                    } else {
-                        new_dial / 100
-                    },
+                    sum + (new_dial <= 0 && dial != 0) as i16
+                        + (new_dial.signum() * new_dial / 100),
                 )
             })
             .1,
