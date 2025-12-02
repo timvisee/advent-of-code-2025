@@ -1,4 +1,6 @@
 pub fn main() {
+    let mut buffer = itoa::Buffer::new();
+
     let count = include_bytes!("../input.txt")
         .split(|b| b == &b',')
         .map(|n| {
@@ -9,19 +11,14 @@ pub fn main() {
         })
         .flat_map(|(a, b)| a..=b)
         .filter(|n| {
-            let s = format!("{n}");
-
-            // Exclude numbers with odd length
-            if s.len() % 2 != 0 {
+            let s = buffer.format(*n).as_bytes();
+            if !s.len().is_multiple_of(2) {
                 return false;
             }
-
             let (a, b) = s.split_at(s.len() / 2);
-            assert_eq!(a.len(), b.len());
-
             a == b
         })
         .sum::<usize>();
 
-    println!("{count}",);
+    println!("{count}");
 }
