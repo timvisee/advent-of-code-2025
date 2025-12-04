@@ -17,38 +17,33 @@ pub fn main() {
             continue;
         }
 
-        let rolls = ADJACENT
+        if ADJACENT
             .into_iter()
             .filter(|(ax, ay)| {
-                let xx = x + ax;
-                let yy = y + ay;
-
-                map.get(yy as usize)
-                    .and_then(|row| row.get(xx as usize))
+                map.get((y + ay) as usize)
+                    .and_then(|row| row.get((x + ax) as usize))
                     .is_some_and(|&c| c == b'@')
             })
             .take(4)
-            .count();
-
-        if rolls >= 4 {
+            .count()
+            >= 4
+        {
             continue;
         }
 
         total += 1;
         map[y as usize][x as usize] = b'.';
 
-        let extras = ADJACENT
-            .into_iter()
-            .filter(|(ax, ay)| {
-                let xx = x + ax;
-                let yy = y + ay;
-
-                map.get(yy as usize)
-                    .and_then(|row| row.get(xx as usize))
-                    .is_some_and(|&c| c == b'@')
-            })
-            .map(|(ax, ay)| (x + ax, y + ay));
-        queue.extend(extras);
+        queue.extend(
+            ADJACENT
+                .into_iter()
+                .map(|(ax, ay)| (ax + x, ay + y))
+                .filter(|&(xx, yy)| {
+                    map.get(yy as usize)
+                        .and_then(|row| row.get(xx as usize))
+                        .is_some_and(|&c| c == b'@')
+                }),
+        );
     }
 
     println!("{total}"); // 8317
