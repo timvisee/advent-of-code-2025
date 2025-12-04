@@ -1,14 +1,6 @@
 pub fn main() {
-    const ADJACENT: [(isize, isize); 8] = [
-        (-1, -1),
-        (-1, 0),
-        (-1, 1),
-        (0, -1),
-        (0, 1),
-        (1, -1),
-        (1, 0),
-        (1, 1),
-    ];
+    #[rustfmt::skip]
+    const ADJACENT: [(isize, isize); 8] = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)];
 
     let map = include_bytes!("../input.txt")
         .split(|b| b == &b'\n')
