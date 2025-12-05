@@ -4,10 +4,11 @@ pub fn main() {
     let count = include_bytes!("../input.txt")
         .split(|b| b == &b',')
         .map(|n| {
-            let mut iter = n
-                .splitn(2, |b| b == &b'-')
-                .map(|n| atoi::atoi::<usize>(n).unwrap());
-            (iter.next().unwrap(), iter.next().unwrap())
+            let (a, b) = n.split_at(n.iter().position(|b| b == &b'-').unwrap());
+            (
+                atoi::atoi::<usize>(a).unwrap(),
+                atoi::atoi::<usize>(&b[1..]).unwrap(),
+            )
         })
         .flat_map(|(a, b)| a..=b)
         .filter(|n| match n {
