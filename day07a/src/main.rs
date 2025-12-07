@@ -18,5 +18,5 @@ pub fn main() {
         }
     }
 
-    println!("{splits}"); // 1590
+    println!("{splits}");
 }

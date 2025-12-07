@@ -17,5 +17,5 @@ pub fn main() {
         }
     }
 
-    println!("{}", paths.iter().sum::<usize>()); // 20571740188555
+    println!("{}", paths.iter().sum::<usize>());
 }
