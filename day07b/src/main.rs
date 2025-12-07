@@ -1,23 +1,21 @@
-use std::collections::HashMap;
-
 pub fn main() {
     let data = include_bytes!("../input.txt")
         .split(|&b| b == b'\n')
         .filter(|line| !line.iter().all(|&b| b == b'.'))
         .collect::<Vec<&[u8]>>();
 
-    let start = data[0].iter().position(|&b| b == b'S').unwrap();
-    let mut paths = HashMap::from([(start, 1)]);
+    let mut paths = [0; 141];
+    paths[data[0].iter().position(|&b| b == b'S').unwrap()] = 1;
 
     for row in data[1..].iter() {
-        for (i, count) in paths.clone() {
+        for (i, count) in paths.into_iter().enumerate() {
             if row[i] == b'^' {
-                paths.remove(&i);
-                *paths.entry(i - 1).or_default() += count;
-                *paths.entry(i + 1).or_default() += count;
+                paths[i] = 0;
+                paths[i - 1] += count;
+                paths[i + 1] += count;
             }
         }
     }
 
-    println!("{}", paths.values().sum::<usize>()); // 20571740188555
+    println!("{}", paths.iter().sum::<usize>()); // 20571740188555
 }

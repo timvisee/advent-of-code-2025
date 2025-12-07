@@ -1,22 +1,19 @@
-use std::collections::HashSet;
-
 pub fn main() {
     let data = include_bytes!("../input.txt")
         .split(|&b| b == b'\n')
         .filter(|line| !line.iter().all(|&b| b == b'.'))
         .collect::<Vec<&[u8]>>();
 
-    let start = data[0].iter().position(|&b| b == b'S').unwrap();
-    let mut paths = HashSet::from([start]);
-    let mut splits = 0;
+    let (mut paths, mut splits) = ([false; 141], 0);
+    paths[data[0].iter().position(|&b| b == b'S').unwrap()] = true;
 
     for row in data[1..].iter() {
-        for i in paths.clone() {
+        for (i, used) in paths.into_iter().enumerate() {
             if row[i] == b'^' {
-                paths.remove(&i);
-                paths.insert(i - 1);
-                paths.insert(i + 1);
-                splits += 1;
+                paths[i] = false;
+                paths[i - 1] = true;
+                paths[i + 1] = true;
+                splits += used as usize;
             }
         }
     }
