@@ -34,11 +34,11 @@ pub fn main() {
         })
         .sum::<usize>();
 
-    println!("{count}"); // 28915664389
+    println!("{count}");
 }
 
 /// Compute sum of all multiples of x in the range [a, b]
-/// See <https://github.com/erik-adelbert/aoc/blob/3f55ce44ba249eb5b47c0edc439bc462a9c67bd7/2025/2/aoc2.go#L124-L141>
+/// From <https://github.com/erik-adelbert/aoc/blob/3f55ce44ba249eb5b47c0edc439bc462a9c67bd7/2025/2/aoc2.go#L124-L141>
 fn m(a: usize, b: usize, x: usize) -> usize {
     let first = a.div_ceil(x) * x;
     if first > b {
