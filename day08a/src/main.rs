@@ -1,5 +1,7 @@
 type Coord = [usize; 3];
 
+const MAX: usize = 188_000_000;
+
 pub fn main() {
     let coords = include_bytes!("../input.txt")
         .split(|&b| b == b'\n')
@@ -12,7 +14,10 @@ pub fn main() {
     let mut edges = Vec::with_capacity(coords.len() * coords.len() / 2);
     for i in 0..coords.len() - 1 {
         for j in i + 1..coords.len() {
-            edges.push((i, j, dist(coords[i], coords[j])));
+            let dist = dist(coords[i], coords[j]);
+            if dist < MAX {
+                edges.push((i, j, dist));
+            }
         }
     }
     edges.sort_unstable_by_key(|&(_, _, dist)| dist);
