@@ -17,7 +17,7 @@ pub fn main() {
     }
     edges.sort_unstable_by_key(|&(_, _, dist)| dist);
 
-    let mut dsu = aph_disjoint_set::DisjointSet::new(1000);
+    let mut dsu = aph_disjoint_set::DisjointSetArrayU16::<1000>::new();
     edges.into_iter().take(1000).for_each(|(a, b, _)| {
         dsu.union(a, b);
     });
