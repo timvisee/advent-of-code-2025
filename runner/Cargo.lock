@@ -3,6 +3,12 @@
 version = 4
 
 [[package]]
+name = "aph_disjoint_set"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ec916e7c5883e65b44aead1b3b77c144e518686472524896868cb00366937c08"
+
+[[package]]
 name = "atoi"
 version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -137,6 +143,22 @@ name = "day07b"
 version = "0.1.0"
 
 [[package]]
+name = "day08a"
+version = "0.1.0"
+dependencies = [
+ "aph_disjoint_set",
+ "atoi",
+]
+
+[[package]]
+name = "day08b"
+version = "0.1.0"
+dependencies = [
+ "aph_disjoint_set",
+ "atoi",
+]
+
+[[package]]
 name = "either"
 version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -198,6 +220,8 @@ dependencies = [
  "day06b",
  "day07a",
  "day07b",
+ "day08a",
+ "day08b",
  "rayon",
  "took",
 ]
