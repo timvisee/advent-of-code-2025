@@ -14,13 +14,13 @@ pub fn main() {
         coords[..coords.len() - 1]
             .iter()
             .enumerate()
-            .flat_map(|(i, &a)| coords[i + 1..].iter().map(move |&b| size(a, b)))
+            .flat_map(|(i, &a)| coords[i + 1..].iter().map(move |&b| area(a, b)))
             .max()
             .unwrap(),
     );
 }
 
 #[inline]
-fn size(a: Coord, b: Coord) -> usize {
+fn area(a: Coord, b: Coord) -> usize {
     (a[0].abs_diff(b[0]) + 1) * (a[1].abs_diff(b[1]) + 1)
 }
