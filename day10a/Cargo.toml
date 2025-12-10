@@ -8,5 +8,5 @@ edition = "2024"
 path = "src/main.rs"
 
 [dependencies]
-atoi = "2.0"
+arrayvec = "0.7"
 itertools = "0.14"

@@ -6,51 +6,39 @@ pub fn main() {
         .map(|line| {
             let mut iter = line.split(|&b| b == b' ');
 
-            let lights = iter
+            let leds = iter
                 .next()
-                .map(|lights| &lights[1..lights.len() - 1])
-                .map(|lights| lights.into_iter().map(|&b| b == b'#').collect::<Vec<_>>())
+                .map(|leds| {
+                    leds[1..]
+                        .iter()
+                        .rev()
+                        .fold(0, |acc, &b| (acc << 1) + (b == b'#') as u16)
+                })
                 .unwrap();
             let toggles = iter
                 .take_while(|toggles| toggles[0] == b'(')
-                .map(|toggles| &toggles[1..toggles.len() - 1])
                 .map(|toggles| {
-                    toggles
+                    toggles[1..]
                         .split(|&b| b == b',')
-                        .map(|n| atoi::atoi::<usize>(n).unwrap())
-                        .collect::<Vec<_>>()
+                        .fold(0, |a, b| a + (1 << (b[0] - b'0')))
                 })
-                .collect::<Vec<_>>();
+                .collect::<arrayvec::ArrayVec<_, 16>>();
 
-            (lights, toggles)
+            (leds, toggles)
         })
         .collect::<Vec<_>>();
 
-    let mut total = 0;
-    for (lights, toggles) in machines {
-        let mut found = false;
-        'outer: for i in 1..10 {
-            for toggles in toggles.iter().cloned().combinations_with_replacement(i) {
-                let mut state = vec![false; lights.len()];
-
-                for toggle in toggles {
-                    for &index in &toggle {
-                        state[index] = !state[index];
-                    }
-                }
-
-                if state == lights {
-                    found = true;
-                    total += i;
-                    break 'outer;
-                }
-            }
-        }
-
-        if !found {
-            unreachable!("No solution found");
-        }
-    }
-
-    println!("{total}");
+    println!(
+        "{}",
+        machines
+            .into_iter()
+            .map(|(leds, toggles)| {
+                (1..10)
+                    .flat_map(|i| toggles.iter().copied().combinations_with_replacement(i))
+                    .find(|toggles| toggles.iter().fold(0, |acc, &b| acc ^ b) == leds)
+                    .unwrap()
+                    .len()
+            })
+            .sum::<usize>(),
+    );
 }
