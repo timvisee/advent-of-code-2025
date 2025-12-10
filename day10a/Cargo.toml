@@ -1,0 +1,12 @@
+[package]
+name = "day10a"
+version = "0.1.0"
+authors = ["Tim Visee <3a4fb3964f@sinenomine.email>"]
+edition = "2024"
+
+[lib]
+path = "src/main.rs"
+
+[dependencies]
+atoi = "2.0"
+itertools = "0.14"
