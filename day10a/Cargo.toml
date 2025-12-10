@@ -9,4 +9,3 @@ path = "src/main.rs"
 
 [dependencies]
 arrayvec = "0.7"
-itertools = "0.14"

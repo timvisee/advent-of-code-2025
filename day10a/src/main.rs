@@ -1,7 +1,5 @@
-use itertools::Itertools;
-
 pub fn main() {
-    let machines = include_bytes!("../input.txt")
+    let presses = include_bytes!("../input.txt")
         .split(|&b| b == b'\n')
         .map(|line| {
             let mut iter = line.split(|&b| b == b' ');
@@ -15,7 +13,7 @@ pub fn main() {
                         .fold(0, |acc, &b| (acc << 1) + (b == b'#') as u16)
                 })
                 .unwrap();
-            let toggles = iter
+            let btns = iter
                 .take_while(|toggles| toggles[0] == b'(')
                 .map(|toggles| {
                     toggles[1..]
@@ -24,21 +22,22 @@ pub fn main() {
                 })
                 .collect::<arrayvec::ArrayVec<_, 16>>();
 
-            (leds, toggles)
-        })
-        .collect::<Vec<_>>();
-
-    println!(
-        "{}",
-        machines
-            .into_iter()
-            .map(|(leds, toggles)| {
-                (1..10)
-                    .flat_map(|i| toggles.iter().copied().combinations_with_replacement(i))
-                    .find(|toggles| toggles.iter().fold(0, |acc, &b| acc ^ b) == leds)
-                    .unwrap()
-                    .len()
+            (0..2usize.pow(btns.len() as _)).fold(usize::MAX, |min, mask| {
+                let n = mask.count_ones() as usize;
+                if n < min
+                    && btns
+                        .iter()
+                        .enumerate()
+                        .filter(|(ix, _)| mask & (1 << ix) != 0)
+                        .fold(leds, |acc, (_, &b)| acc ^ b)
+                        == 0
+                {
+                    return min.min(n);
+                }
+                min
             })
-            .sum::<usize>(),
-    );
+        })
+        .sum::<usize>();
+
+    println!("{presses}");
 }
