@@ -30,10 +30,11 @@ Here is how long each solution runs with my input. All solutions are measured
 | [day 8](https://adventofcode.com/2025/day/8)   | [` 0.685 ms`](./day08a/src/main.rs) | [` 0.676 ms`](./day08b/src/main.rs) |
 | [day 9](https://adventofcode.com/2025/day/9)   | [` 0.106 ms`](./day09a/src/main.rs) | [` 2.33  ms`](./day09b/src/main.rs) |
 | [day 10](https://adventofcode.com/2025/day/10)   | [` 0.718 ms`](./day10a/src/main.rs) | [`12.80  ms`](./day10b/src/main.rs) |
+| [day 11](https://adventofcode.com/2025/day/11)   | [` 0.294 ms`](./day11a/src/main.rs) | [` 1.10  ms`](./day11b/src/main.rs) |
 
 |              | one-by-one (1 CPU core)                   | parallel                                      |
 |:-------------|:------------------------------------------|:----------------------------------------------|
-| _everything_ | [`18.24  ms`](./runner/src/bin/runner.rs) | [`14.20  ms`](./runner/src/bin/runner-par.rs) |
+| _everything_ | [`19.65  ms`](./runner/src/bin/runner.rs) | [`14.13  ms`](./runner/src/bin/runner-par.rs) |
 
 ## Run solutions
 
