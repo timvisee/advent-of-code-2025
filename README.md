@@ -47,18 +47,16 @@ appear.
 # Switch to day 1a, add input, and run it
 cd day01a
 nano input.txt
-cargo +nightly run --release
+cargo run --release
 
 # or run everything in parallel
 cd ../runner
-cargo +nightly run --release --bin runner-par
+cargo run --release --bin runner-par
 
 # or benchmark every day
 cd ../runner
-cargo +nightly run --release --bin bench
+cargo run --release --bin bench
 ```
-
-Some solutions require Rust Nightly, that's why `+nightly` is included.
 
 Sadly I cannot include my puzzle input anymore to make each solution easily
 runnable as per Advent of Code
