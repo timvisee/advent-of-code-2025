@@ -4,6 +4,9 @@ version = "0.1.0"
 authors = ["Tim Visee <3a4fb3964f@sinenomine.email>"]
 edition = "2024"
 
+[profile.release]
+lto = true
+
 [dependencies]
 rayon = "1.8"
 took = "0.1"

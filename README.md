@@ -35,7 +35,7 @@ Here is how long each solution runs with my input. All solutions are measured
 
 |              | one-by-one (1 CPU core)                   | parallel                                      |
 |:-------------|:------------------------------------------|:----------------------------------------------|
-| _everything_ | [`19.55  ms`](./runner/src/bin/runner.rs) | [`14.17  ms`](./runner/src/bin/runner-par.rs) |
+| _everything_ | [`18.41  ms`](./runner/src/bin/runner.rs) | [`13.78  ms`](./runner/src/bin/runner-par.rs) |
 
 ## Run solutions
 
